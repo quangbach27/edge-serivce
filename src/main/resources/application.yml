@@ -38,6 +38,7 @@ spring:
               args:
                 name: orderCircuitBreaker
       default-filters:
+        - SaveSession
         - name: Retry
           args:
             retries: 3
@@ -49,6 +50,18 @@ spring:
               maxBackOff: 500ms
               factor: 2
               basedOnPreviousValue: false
+
+  redis:
+    connect-timeout: 2s
+    host: localhost
+    port: 6379
+    timeout: 1s
+  session:
+    redis:
+      timeout: 10m
+      namespace: polar:edge
+
+
 
 resilience4j:
   circuitbreaker:
